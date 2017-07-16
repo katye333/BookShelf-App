@@ -104,9 +104,20 @@ body, .app {
 }
 
 /* books grid */
-
-.books-grid {
+ol {
     list-style-type: none;
+}
+
+#currentlyReading:after {
+    content: 'Currently Reading';
+}
+#wantToRead:after {
+    content: 'Want to Read';
+}
+#read:after {
+    content: 'Read';
+}
+.books-grid {
     padding: 0;
     margin: 0;
 
@@ -132,7 +143,6 @@ body, .app {
 .book-authors {
     color: #999;
 }
-
 .book-top {
     position: relative;
     height: 200px;
