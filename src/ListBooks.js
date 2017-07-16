@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom' 
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ListBooks extends Component {
 	render() {
-		const { books } = this.props
+		const { books } = this.props;
 		const dictionary_books = books.reduce((obj, current) => {
-			current.formatted_authors = current.authors.join('\n')
+			current.formatted_authors = current.authors.join('\n');
 			if (!obj[current.shelf]) {
-				obj[current.shelf] = []
-				obj[current.shelf].push(current)
+				obj[current.shelf] = [];
+				obj[current.shelf].push(current);
 			}
 			else {
-				obj[current.shelf].push(current)
+				obj[current.shelf].push(current);
 			}
-			return obj
-		},{})
+			return obj;
+		},{});
 
 		return (
 			<div className="list-books">
@@ -33,14 +33,11 @@ class ListBooks extends Component {
 												<li>
 													<div className="book">
 													    <div className="book-top">
-													        <div 
-													        	className="book-cover" 
-													        	style={{ 
-													        		width: 128, 
-													        		height: 193, 
-													        		backgroundImage: `url(${book.imageLinks.thumbnail})`
-													        	}}>
-													        </div>
+													        <div className="book-cover" style={{
+													        	width: 128,
+													        	height: 193,
+													        	backgroundImage: `url(${book.imageLinks.thumbnail})`
+															}} />
 													        <div className="book-shelf-changer">
 													            <select>
 													                <option value="none" disabled>Move to...</option>
@@ -71,4 +68,4 @@ class ListBooks extends Component {
 		)
 	}
 }
-export default ListBooks
+export default ListBooks;

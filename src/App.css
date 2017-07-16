@@ -20,29 +20,24 @@ body, .app {
     margin: 0;
     color: white;
 }
-
 .list-books-content {
     padding: 0 0 80px;
     flex: 1;
 }
-
 .bookshelf {
     padding: 0 10px 20px;
 }
-
 @media (min-width: 600px) {
     .bookshelf {
         padding: 0 20px 40px;
     }
 }
-
 .bookshelf-title {
     border-bottom: 1px solid #dedede;
 }
 .bookshelf-books {
     text-align: center;
 }
-
 .open-search {
     position: fixed;
     right: 25px;
@@ -84,7 +79,6 @@ body, .app {
     border: none;
     outline: none;
 }
-
 .close-search {
     display: block;
     top: 20px;
@@ -98,15 +92,11 @@ body, .app {
     background-size: 28px;
     font-size: 0;
 }
-
 .search-books-results {
     padding: 80px 10px 20px;
 }
 
 /* books grid */
-ol {
-    list-style-type: none;
-}
 
 #currentlyReading:after {
     content: 'Currently Reading';
@@ -117,10 +107,12 @@ ol {
 #read:after {
     content: 'Read';
 }
+ol {
+    list-style-type: none;
+}
 .books-grid {
     padding: 0;
     margin: 0;
-
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -129,7 +121,6 @@ ol {
     padding: 10px 15px;
     text-align: left;
 }
-
 .book {
     width: 140px;
 }
@@ -149,7 +140,6 @@ ol {
     display: flex;
     align-items: flex-end;
 }
-
 .book-shelf-changer {
     position: absolute;
     right: 0;
