@@ -5,7 +5,7 @@ import Book from './Book';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 
-class App extends React.Component {
+class Bookcase extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -88,4 +88,4 @@ class App extends React.Component {
         )
     }
 }
-export default App;
+export default Bookcase;

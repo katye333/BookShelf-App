@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import App from './App';
+import Bookcase from './Bookcase';
 
 ReactDOM.render(
-	<BrowserRouter><App /></BrowserRouter>,
+	<BrowserRouter><Bookcase /></BrowserRouter>,
 	document.getElementById('root')
 );
