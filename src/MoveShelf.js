@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
+
 class MoveShelf extends Component {
-	state = {
-		shelf: []
-	}
 	render() {
 		const { book, onUpdateShelf } = this.props;
 
