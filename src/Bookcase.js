@@ -40,7 +40,7 @@ class Bookcase extends React.Component {
     render() {
         return (
             <div>
-                <Route exact path='/' render={() => (
+                <Route exact path="/" render={() => (
                     <div className="list-books">
                         <div className="list-books-title">
                             <h1>MyReads</h1>
@@ -49,12 +49,12 @@ class Bookcase extends React.Component {
                             <Bookshelf books={this.state.books} updateBooks={this.updateBooks} />
 
                             <div className="open-search">
-                                <Link to='/search'>Add a book</Link>
+                                <Link to="/search">Add a book</Link>
                             </div>
                         </div>
                     </div>
                 )} />
-                <Route path='/search' render={({ history }) => (
+                <Route path="/search" render={({ history }) => (
                     <AddBook
                         books={this.state.books}
                         updateBooks={(book, shelf) => {

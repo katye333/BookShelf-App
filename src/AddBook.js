@@ -43,8 +43,8 @@ class AddBook extends Component {
 					<Link className="close-search" to='/'>Close</Link>
 					<div className="search-books-input-wrapper">
 						<input
-		    				type='text'
-		    				placeholder='Search by title or author'
+		    				type="text"
+		    				placeholder="Search by title or author"
 		    				value={query}
 		    				onChange={(event) => this.updateQuery(event.target.value)} />
 					</div>

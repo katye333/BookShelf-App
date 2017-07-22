@@ -15,7 +15,7 @@ class Book extends Component {
 	render() {
 		const { books, updateBooks } = this.props;
 		return (
-			<ol className='books-grid'>
+			<ol className="books-grid">
 				{books.map((book) => (
 					<li key={book.id}>
 						<div className="book">
