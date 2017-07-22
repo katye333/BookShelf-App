@@ -6,9 +6,22 @@ import './App.css';
 class Bookshelf extends React.Component {
     render() {
         const { books, updateBooks } = this.props;
-        let books_by_shelf = _.groupBy(books, 'shelf');
 
+        /*
+            (Using LoDash)
+            Build dictionary object from books array in following form:
+                * {
+                *     currentlyReading: [object, object],
+                *     wantToRead: [object, object],
+                *     read: [object, object]
+                * }
+        */
+
+        let books_by_shelf = _.groupBy(books, 'shelf');
         return (
+
+            // Map the keys of the dictionary object as each shelf of the bookcase
+            // Pass the Book component an entire shelf of books
             <div>
                 {_.keys(books_by_shelf).map((shelf) => (
                     <div key={shelf} className="bookshelf">
@@ -19,7 +32,7 @@ class Bookshelf extends React.Component {
                     </div>
                 ))};
             </div>
-        )
+        );
     }
 }
 export default Bookshelf;

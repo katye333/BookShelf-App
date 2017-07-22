@@ -4,10 +4,16 @@ import * as BooksAPI from './BooksAPI';
 import Book from './Book';
 
 class AddBook extends Component {
+	// State variable declarations
+	// query contains the user-supplied search terms
+	// results will hold the books that match the query
 	state = {
 		query: '',
 		results: []
 	};
+
+	// On input changed, populate query state variable
+	// Show blank screen if no results found or on if field is cleared
 	updateQuery = (query) => {
 		this.setState({ query: query });
 		if (query !== "") {
@@ -26,9 +32,6 @@ class AddBook extends Component {
 			this.setState({ results: [] });
 		}
 	};
-	clearQuery = () => {
-		this.setState({ query: '' });
-	};
 
 	render() {
 		const { query, results } = this.state;
@@ -43,8 +46,7 @@ class AddBook extends Component {
 		    				type='text'
 		    				placeholder='Search by title or author'
 		    				value={query}
-		    				onChange={(event) => this.updateQuery(event.target.value)}
-						/>
+		    				onChange={(event) => this.updateQuery(event.target.value)} />
 					</div>
 				</div>
 
@@ -52,7 +54,7 @@ class AddBook extends Component {
 					<Book books={results} updateBooks={this.props.updateBooks} />
 				</div>
 			</div>
-		)
+		);
 	}
 }
 export default AddBook;

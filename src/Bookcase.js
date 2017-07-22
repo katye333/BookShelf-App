@@ -3,10 +3,11 @@ import { Route, Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import Bookshelf from './Bookshelf';
 import AddBook from './AddBook';
-
 import './App.css';
 
+// Handles the state variables and custom events
 class Bookcase extends React.Component {
+    // Create our empty state variable
     constructor(props) {
         super(props);
         this.state = {
@@ -14,6 +15,8 @@ class Bookcase extends React.Component {
         };
     }
 
+    // After component has been inserted into the DOM,
+    // retrieve the books that are available to the user 
     componentDidMount() {
         BooksAPI.getAll().then(books => {
             this.setState({
@@ -22,6 +25,8 @@ class Bookcase extends React.Component {
         });
     }
 
+    // Update book using API
+    // then overwrite books array with updated data from getAll method
     updateBooks = (book, shelf) => {
         return BooksAPI.update(book, shelf).then(books => {
             BooksAPI.getAll().then(books => {
@@ -35,7 +40,7 @@ class Bookcase extends React.Component {
     render() {
         return (
             <div>
-                <Route exact path='/' render={({ history }) => (
+                <Route exact path='/' render={() => (
                     <div className="list-books">
                         <div className="list-books-title">
                             <h1>MyReads</h1>
@@ -55,8 +60,7 @@ class Bookcase extends React.Component {
                         updateBooks={(book, shelf) => {
                             this.updateBooks(book, shelf)
                             history.push('/')
-                        }}
-                    />
+                        }} />
                 )} />
             </div>
         )

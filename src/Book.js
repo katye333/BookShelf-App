@@ -9,10 +9,9 @@ class Book extends Component {
 					obj.imageLinks = {};
 					obj.imageLinks.thumbnail = `url('./icons/default_book.png')`
 				}
-			})
+			});
 		}
 	}
-
 	render() {
 		const { books, updateBooks } = this.props;
 		return (
