@@ -16,8 +16,8 @@ class Book extends Component {
 						        	height: 193,
 						        	backgroundImage: `url(${book.imageLinks.thumbnail})`
 								}} />
-						        <MoveShelf 
-						        	book={book} 
+						        <MoveShelf
+						        	book={book}
 						        	onUpdateShelf={onUpdateShelf}>
 						        </MoveShelf>
 						    </div>

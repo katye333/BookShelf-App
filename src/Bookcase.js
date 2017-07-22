@@ -13,22 +13,27 @@ class Bookcase extends React.Component {
         }
     }
 
+    // After the component has been inserted into the
+    // DOM, set the state using return values from API
     componentDidMount() {
         BooksAPI.getAll().then((books) => {
-            this.setState({ 
+            this.setState({
                 books: books
             });
         });
     }
 
+    // Called before .then() in updateShelf() 
     componentDidUpdate(prevProps, prevState) {
         BooksAPI.getAll().then((books) => {
-            this.setState({ 
+            this.setState({
                 books: books
             });
         });
     }
 
+    // This method calls the API update function then the 
+    // componentDidUpdate event fires before we return
     updateShelf = (book, shelf) => {
         BooksAPI.update(book, shelf).then((books) => {
             return books;
@@ -36,6 +41,16 @@ class Bookcase extends React.Component {
     }
 
     render() {
+
+        /* 
+            * Build dictionary from state object for better 
+            * grouping of data using the following format
+                * {
+                *     currentlyReading: [object, object],
+                *     wantToRead: [object, object],
+                *     read: [object, object]
+                * }
+        */
         let dictionary_books = this.state.books.reduce((obj, current) => {
             if (!obj[current.shelf]) {
                 obj[current.shelf] = [];
@@ -61,7 +76,7 @@ class Bookcase extends React.Component {
                                         <h2 id={shelf} className="bookshelf-title"></h2>
                                         <div className="bookshelf-books">
                                             <div className="bookshelf-books">
-                                                <Book 
+                                                <Book
                                                     shelf={dictionary_books[shelf]}
                                                     onUpdateShelf={(book, shelf) => {
                                                         this.updateShelf(book, shelf)
