@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 class Book extends Component {
+	static propTypes = {
+        books: PropTypes.array.isRequired,
+        updateBooks: PropTypes.func.isRequired
+    }
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.books.length > 0) {
 			_.each(nextProps.books, function (obj) {
@@ -21,7 +27,7 @@ class Book extends Component {
 					<li key={book.id}>
 						<div className="book">
 						    <div className="book-top">
-						    	{book.imageLinks.thumbnail.missing && <img className="book-cover-missing" />}
+						    	{book.imageLinks.thumbnail.missing && <img className="book-cover-missing" alt="Missing book cover!" />}
 						    	{!book.imageLinks.thumbnail.missing && 
 								        <div className="book-cover" style={{
 								        	width: 128,
@@ -29,7 +35,7 @@ class Book extends Component {
 								        	backgroundImage: `url(${book.imageLinks.thumbnail})`
 										}} />}}
 						        <div className="book-shelf-changer">
-			        	            <select onChange={(event) => { this.props.updateBooks(book, event.target.value) }}>
+			        	            <select onChange={(event) => { updateBooks(book, event.target.value) }}>
 			        	                <option readOnly>Move to...</option>
 			        	                <option value="currentlyReading">Currently Reading</option>
 			        	                <option value="wantToRead">Want to Read</option>

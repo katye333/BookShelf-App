@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
 
 class AddBook extends Component {
+	static propTypes = {
+	    updateBooks: PropTypes.func.isRequired
+	}
+
 	// State variable declarations
 	// query contains the user-supplied search terms
 	// results will hold the books that match the query
@@ -35,7 +40,7 @@ class AddBook extends Component {
 
 	render() {
 		const { query, results } = this.state;
-		const { books, updateBooks } = this.props;
+		const { updateBooks } = this.props;
 
 		return (
 			<div className="search-books">
@@ -51,7 +56,7 @@ class AddBook extends Component {
 				</div>
 
 				<div className="search-books-results">
-					<Book books={results} updateBooks={this.props.updateBooks} />
+					<Book books={results} updateBooks={updateBooks} />
 				</div>
 			</div>
 		);

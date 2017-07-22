@@ -56,7 +56,6 @@ class Bookcase extends React.Component {
                 )} />
                 <Route path="/search" render={({ history }) => (
                     <AddBook
-                        books={this.state.books}
                         updateBooks={(book, shelf) => {
                             this.updateBooks(book, shelf)
                             history.push('/')

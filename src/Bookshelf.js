@@ -1,9 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import Book from './Book';
 import './App.css';
 
 class Bookshelf extends React.Component {
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        updateBooks: PropTypes.func.isRequired
+    }
     render() {
         const { books, updateBooks } = this.props;
 
@@ -27,7 +32,7 @@ class Bookshelf extends React.Component {
                     <div key={shelf} className="bookshelf">
                         <h2 id={shelf} className="bookshelf-title"></h2>
                         <div className="bookshelf-books">
-                            <Book books={books_by_shelf[shelf]} updateBooks={this.props.updateBooks} />
+                            <Book books={books_by_shelf[shelf]} updateBooks={updateBooks} />
                         </div>
                     </div>
                 ))};
