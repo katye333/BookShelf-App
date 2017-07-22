@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import MoveShelf from './MoveShelf'
 
 class Book extends Component {
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.shelf.length > 0) {
+			_.each(nextProps.shelf, function (obj) {
+				if (!obj.imageLinks) {
+					obj.imageLinks = {};
+					obj.imageLinks.thumbnail = `url('./icons/default_book.png')`
+				}
+			})
+		}
+	}
+
 	render() {
 		const { shelf, onUpdateShelf } = this.props;
-
 		return (
 			<ol className='books-grid'>
-				{shelf.map((book, index) => (
+				{shelf.map((book) => (
 					<li key={book.id}>
 						<div className="book">
 						    <div className="book-top">
@@ -23,8 +34,8 @@ class Book extends Component {
 						    </div>
 						    <div className="book-title">{book.title}</div>
 						    <div className="book-authors">
-                        		<pre>{book.authors.join('\n')}</pre>
-                        	</div>
+                            	<pre>{book.authors}</pre>
+                          	</div>
 						</div>
 					</li>
 				))}

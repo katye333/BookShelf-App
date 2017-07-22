@@ -20,7 +20,7 @@ class Bookcase extends React.Component {
     // After the component has been inserted into the
     // DOM, set the state using return values from API
     componentDidMount() {
-        BooksAPI.getAll().then((books) => {
+        BooksAPI.getAll().then(books => {
             this.setState({
                 books: books
             });
@@ -41,8 +41,7 @@ class Bookcase extends React.Component {
 
     render() {
 
-        /* 
-            (Using LoDash)
+        /** (Using LoDash)
             Build dictionary of books from state variable, grouped by shelf name
             Format of dictionary: 
             * {
@@ -51,6 +50,7 @@ class Bookcase extends React.Component {
             *     read: [object, object]
             * } 
         */
+        const books = this.state.books;
         let dictionary_books = _.groupBy(this.state.books, 'shelf');
 
         return (
@@ -69,9 +69,10 @@ class Bookcase extends React.Component {
                                             <Book
                                                 shelf={dictionary_books[shelf]}
                                                 onUpdateShelf={(book, shelf) => {
-                                                    this.updateShelf(book, shelf)
-                                                    history.push('/')
-                                                }} />
+                                                    this.updateShelf(book, shelf);
+                                                    history.push('/');
+                                                }}>
+                                            </Book>
                                         </div>
                                     </div>
                                 ))};
@@ -84,7 +85,9 @@ class Bookcase extends React.Component {
                     </div>
                 )} />
 
-                <Route path='/search' component={AddBook} />
+                <Route path='/search' render={() => (
+                    <AddBook />
+                    )} />
             </div>
         )
     }

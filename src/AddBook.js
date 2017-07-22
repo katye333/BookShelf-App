@@ -1,32 +1,38 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
 import Book from './Book';
-import escapeRegExp from 'escape-string-regexp';
-import sortBy from 'sort-by';
 
 class AddBook extends Component {
 	state = {
-		query: ''
+		query: '',
+		results: []
 	};
 	updateQuery = (query) => {
-		this.setState({ query: query.trim() });
+		this.setState({ query: query });
+		if (query !== "") {
+			BooksAPI.search(query, 20).then(result => {
+				if (result.error) {
+					this.setState({ results: [] });
+				}
+				else
+				{
+					this.setState({ results: result });
+				}
+			});
+		}
+		else
+		{
+			this.setState({ results: [] });
+		}
 	};
 	clearQuery = () => {
 		this.setState({ query: '' });
 	};
-	render() {
-		const { books, shelf, onUpdateShelf } = this.props;
-		const { query } = this.state;
 
-		let showingBooks;
-		if (query) {
-			const match = new RegExp(escapeRegExp(query), 'i');
-			showingBooks = books.filter((book) => match.test(book.title) || match.test(book.authors));
-		}
-		else {
-			showingBooks = books;
-		}
-		showingBooks.sort(sortBy('title'));
+	render() {
+		const { onUpdateShelf } = this.props;
+		const { query, results } = this.state;
 
 		return (
 			<div className="search-books">
@@ -43,10 +49,7 @@ class AddBook extends Component {
 				</div>
 
 				<div className="search-books-results">
-					<Book 
-						shelf={showingBooks}
-						onUpdateShelf={onUpdateShelf}>
-					</Book>
+					<Book shelf={results} />
 				</div>
 			</div>
 		)
