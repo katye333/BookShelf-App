@@ -1,15 +1,12 @@
 import React from 'react';
-import _ from 'lodash';
 import { Route, Link } from 'react-router-dom';
-import Book from './Book';
-import AddBook from './AddBook';
 import * as BooksAPI from './BooksAPI';
+import Bookshelf from './Bookshelf';
+import AddBook from './AddBook';
+
 import './App.css';
 
 class Bookcase extends React.Component {
-    // Create empty state variable that will contain
-    // the books currently in Bookcase 
-    // Will be populated with data on componentDidMount()
     constructor(props) {
         super(props);
         this.state = {
@@ -17,8 +14,6 @@ class Bookcase extends React.Component {
         };
     }
 
-    // After the component has been inserted into the
-    // DOM, set the state using return values from API
     componentDidMount() {
         BooksAPI.getAll().then(books => {
             this.setState({
@@ -27,9 +22,7 @@ class Bookcase extends React.Component {
         });
     }
 
-    // This method calls the API update function and 
-    // resets the state variable to the updated values
-    updateShelf = (book, shelf) => {
+    updateBooks = (book, shelf) => {
         return BooksAPI.update(book, shelf).then(books => {
             BooksAPI.getAll().then(books => {
                 this.setState({
@@ -40,19 +33,6 @@ class Bookcase extends React.Component {
     }
 
     render() {
-
-        /** (Using LoDash)
-            Build dictionary of books from state variable, grouped by shelf name
-            Format of dictionary: 
-            * {
-            *     currentlyReading: [object, object],
-            *     wantToRead: [object, object],
-            *     read: [object, object]
-            * } 
-        */
-        const books = this.state.books;
-        let dictionary_books = _.groupBy(this.state.books, 'shelf');
-
         return (
             <div>
                 <Route exact path='/' render={({ history }) => (
@@ -61,22 +41,7 @@ class Bookcase extends React.Component {
                             <h1>MyReads</h1>
                         </div>
                         <div className="list-books-content">
-                            <div>
-                                {Object.keys(dictionary_books).map((shelf) => (
-                                    <div key={shelf} className="bookshelf">
-                                        <h2 id={shelf} className="bookshelf-title"></h2>
-                                        <div className="bookshelf-books">
-                                            <Book
-                                                shelf={dictionary_books[shelf]}
-                                                onUpdateShelf={(book, shelf) => {
-                                                    this.updateShelf(book, shelf);
-                                                    history.push('/');
-                                                }}>
-                                            </Book>
-                                        </div>
-                                    </div>
-                                ))};
-                            </div>
+                            <Bookshelf books={this.state.books} updateBooks={this.updateBooks} />
 
                             <div className="open-search">
                                 <Link to='/search'>Add a book</Link>
@@ -84,10 +49,15 @@ class Bookcase extends React.Component {
                         </div>
                     </div>
                 )} />
-
-                <Route path='/search' render={() => (
-                    <AddBook />
-                    )} />
+                <Route path='/search' render={({ history }) => (
+                    <AddBook
+                        books={this.state.books}
+                        updateBooks={(book, shelf) => {
+                            this.updateBooks(book, shelf)
+                            history.push('/')
+                        }}
+                    />
+                )} />
             </div>
         )
     }

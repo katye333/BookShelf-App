@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import MoveShelf from './MoveShelf'
 
 class Book extends Component {
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.shelf.length > 0) {
-			_.each(nextProps.shelf, function (obj) {
+		if (nextProps.books.length > 0) {
+			_.each(nextProps.books, function (obj) {
 				if (!obj.imageLinks) {
 					obj.imageLinks = {};
 					obj.imageLinks.thumbnail = `url('./icons/default_book.png')`
@@ -15,10 +14,10 @@ class Book extends Component {
 	}
 
 	render() {
-		const { shelf, onUpdateShelf } = this.props;
+		const { books, updateBooks } = this.props;
 		return (
 			<ol className='books-grid'>
-				{shelf.map((book) => (
+				{books.map((book) => (
 					<li key={book.id}>
 						<div className="book">
 						    <div className="book-top">
@@ -27,14 +26,19 @@ class Book extends Component {
 						        	height: 193,
 						        	backgroundImage: `url(${book.imageLinks.thumbnail})`
 								}} />
-						        <MoveShelf
-						        	book={book}
-						        	onUpdateShelf={onUpdateShelf}>
-						        </MoveShelf>
+						        <div className="book-shelf-changer">
+			        	            <select onChange={(event) => { this.props.updateBooks(book, event.target.value) }}>
+			        	                <option readOnly>Move to...</option>
+			        	                <option value="currentlyReading">Currently Reading</option>
+			        	                <option value="wantToRead">Want to Read</option>
+			        	                <option value="read">Read</option>
+			        	                <option value="none">None</option>
+			        	            </select>
+			        	        </div>
 						    </div>
 						    <div className="book-title">{book.title}</div>
 						    <div className="book-authors">
-                            	<pre>{book.authors}</pre>
+                            	<pre>{book.authors && book.authors.join('\n')}</pre>
                           	</div>
 						</div>
 					</li>

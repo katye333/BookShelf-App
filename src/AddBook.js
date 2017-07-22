@@ -31,8 +31,8 @@ class AddBook extends Component {
 	};
 
 	render() {
-		const { onUpdateShelf } = this.props;
 		const { query, results } = this.state;
+		const { books, updateBooks } = this.props;
 
 		return (
 			<div className="search-books">
@@ -49,7 +49,7 @@ class AddBook extends Component {
 				</div>
 
 				<div className="search-books-results">
-					<Book shelf={results} />
+					<Book books={results} updateBooks={this.props.updateBooks} />
 				</div>
 			</div>
 		)
