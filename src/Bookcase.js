@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
+import _ from 'lodash';
 import * as BooksAPI from './BooksAPI';
 import Bookshelf from './Bookshelf';
 import AddBook from './AddBook';
@@ -19,9 +20,18 @@ class Bookcase extends React.Component {
     // retrieve the books that are available to the user 
     componentDidMount() {
         BooksAPI.getAll().then(books => {
-            this.setState({
-                books: books
-            });
+            if (books.length > 0) {
+                _.each(books, function (obj) {
+                    if (!obj.imageLinks) {
+                        obj.imageLinks = {};
+                        obj.imageLinks.thumbnail = {};
+                        obj.imageLinks.thumbnail.missing = true;
+                    }
+                });
+                this.setState({
+                    books: books
+                })
+            }
         });
     };
 
