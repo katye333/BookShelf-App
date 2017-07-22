@@ -1,16 +1,20 @@
 import React from 'react';
+import _ from 'lodash';
 import { Route, Link } from 'react-router-dom';
-import AddBook from './AddBook';
 import Book from './Book';
+import AddBook from './AddBook';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 
 class Bookcase extends React.Component {
+    // Create empty state variable that will contain
+    // the books currently in Bookcase 
+    // Will be populated with data on componentDidMount()
     constructor(props) {
         super(props);
         this.state = {
             books: []
-        }
+        };
     }
 
     // After the component has been inserted into the
@@ -23,44 +27,31 @@ class Bookcase extends React.Component {
         });
     }
 
-    // Called before .then() in updateShelf() 
-    componentDidUpdate(prevProps, prevState) {
-        BooksAPI.getAll().then((books) => {
-            this.setState({
-                books: books
-            });
-        });
-    }
-
-    // This method calls the API update function then the 
-    // componentDidUpdate event fires before we return
+    // This method calls the API update function and 
+    // resets the state variable to the updated values
     updateShelf = (book, shelf) => {
-        BooksAPI.update(book, shelf).then((books) => {
-            return books;
+        return BooksAPI.update(book, shelf).then(books => {
+            BooksAPI.getAll().then(books => {
+                this.setState({
+                    books: books
+                });
+            });
         });
     }
 
     render() {
 
         /* 
-            * Build dictionary from state object for better 
-            * grouping of data using the following format
-                * {
-                *     currentlyReading: [object, object],
-                *     wantToRead: [object, object],
-                *     read: [object, object]
-                * }
+            (Using LoDash)
+            Build dictionary of books from state variable, grouped by shelf name
+            Format of dictionary: 
+            * {
+            *     currentlyReading: [object, object],
+            *     wantToRead: [object, object],
+            *     read: [object, object]
+            * } 
         */
-        let dictionary_books = this.state.books.reduce((obj, current) => {
-            if (!obj[current.shelf]) {
-                obj[current.shelf] = [];
-                obj[current.shelf].push(current);
-            }
-            else {
-                obj[current.shelf].push(current);
-            }
-            return obj;
-        },{});
+        let dictionary_books = _.groupBy(this.state.books, 'shelf');
 
         return (
             <div>
@@ -75,18 +66,15 @@ class Bookcase extends React.Component {
                                     <div key={shelf} className="bookshelf">
                                         <h2 id={shelf} className="bookshelf-title"></h2>
                                         <div className="bookshelf-books">
-                                            <div className="bookshelf-books">
-                                                <Book
-                                                    shelf={dictionary_books[shelf]}
-                                                    onUpdateShelf={(book, shelf) => {
-                                                        this.updateShelf(book, shelf)
-                                                        history.push('/')
-                                                    }}>
-                                                </Book>
-                                            </div>
+                                            <Book
+                                                shelf={dictionary_books[shelf]}
+                                                onUpdateShelf={(book, shelf) => {
+                                                    this.updateShelf(book, shelf)
+                                                    history.push('/')
+                                                }} />
                                         </div>
                                     </div>
-                                ))}
+                                ))};
                             </div>
 
                             <div className="open-search">
@@ -96,9 +84,7 @@ class Bookcase extends React.Component {
                     </div>
                 )} />
 
-                <Route path='/search' render={({ history }) => (
-                    <AddBook books={this.state.books}></AddBook>
-                )} />
+                <Route path='/search' component={AddBook} />
             </div>
         )
     }
