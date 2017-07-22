@@ -23,7 +23,7 @@ class Bookcase extends React.Component {
                 books: books
             });
         });
-    }
+    };
 
     // Update book using API
     // then overwrite books array with updated data from getAll method
@@ -47,7 +47,6 @@ class Bookcase extends React.Component {
                         </div>
                         <div className="list-books-content">
                             <Bookshelf books={this.state.books} updateBooks={this.updateBooks} />
-
                             <div className="open-search">
                                 <Link to="/search">Add a book</Link>
                             </div>
@@ -59,10 +58,11 @@ class Bookcase extends React.Component {
                         updateBooks={(book, shelf) => {
                             this.updateBooks(book, shelf)
                             history.push('/')
-                        }} />
+                        }}>
+                    </AddBook>
                 )} />
             </div>
-        )
+        );
     }
 }
 export default Bookcase;

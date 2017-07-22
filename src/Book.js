@@ -6,14 +6,14 @@ class Book extends Component {
 	static propTypes = {
         books: PropTypes.array.isRequired,
         updateBooks: PropTypes.func.isRequired
-    }
+    };
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.books.length > 0) {
 			_.each(nextProps.books, function (obj) {
 				if (!obj.imageLinks) {
 					obj.imageLinks = {};
-					obj.imageLinks.thumbnail = {}
+					obj.imageLinks.thumbnail = {};
 					obj.imageLinks.thumbnail.missing = true;
 				}
 			});
@@ -27,13 +27,16 @@ class Book extends Component {
 					<li key={book.id}>
 						<div className="book">
 						    <div className="book-top">
-						    	{book.imageLinks.thumbnail.missing && <img className="book-cover-missing" alt="Missing book cover!" />}
+						    	{book.imageLinks.thumbnail.missing && 
+						    		<img className="book-cover-missing" alt="Missing book cover!" />
+						    	}
 						    	{!book.imageLinks.thumbnail.missing && 
 								        <div className="book-cover" style={{
 								        	width: 128,
 								        	height: 193,
 								        	backgroundImage: `url(${book.imageLinks.thumbnail})`
-										}} />}}
+										}}></div>
+								}
 						        <div className="book-shelf-changer">
 			        	            <select onChange={(event) => { updateBooks(book, event.target.value) }}>
 			        	                <option readOnly>Move to...</option>

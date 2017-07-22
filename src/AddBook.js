@@ -7,7 +7,7 @@ import Book from './Book';
 class AddBook extends Component {
 	static propTypes = {
 	    updateBooks: PropTypes.func.isRequired
-	}
+	};
 
 	// State variable declarations
 	// query contains the user-supplied search terms
