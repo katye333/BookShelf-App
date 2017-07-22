@@ -7,7 +7,8 @@ class Book extends Component {
 			_.each(nextProps.books, function (obj) {
 				if (!obj.imageLinks) {
 					obj.imageLinks = {};
-					obj.imageLinks.thumbnail = `url('./icons/default_book.png')`
+					obj.imageLinks.thumbnail = {}
+					obj.imageLinks.thumbnail.missing = true;
 				}
 			});
 		}
@@ -20,11 +21,13 @@ class Book extends Component {
 					<li key={book.id}>
 						<div className="book">
 						    <div className="book-top">
-						        <div className="book-cover" style={{
-						        	width: 128,
-						        	height: 193,
-						        	backgroundImage: `url(${book.imageLinks.thumbnail})`
-								}} />
+						    	{book.imageLinks.thumbnail.missing && <img className="book-cover-missing" />}
+						    	{!book.imageLinks.thumbnail.missing && 
+								        <div className="book-cover" style={{
+								        	width: 128,
+								        	height: 193,
+								        	backgroundImage: `url(${book.imageLinks.thumbnail})`
+										}} />}}
 						        <div className="book-shelf-changer">
 			        	            <select onChange={(event) => { this.props.updateBooks(book, event.target.value) }}>
 			        	                <option readOnly>Move to...</option>
