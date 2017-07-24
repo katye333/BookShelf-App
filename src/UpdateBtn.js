@@ -6,13 +6,15 @@ class UpdateBtn extends Component {
 		selectedBook: PropTypes.object.isRequired,
         updateBooks: PropTypes.func.isRequired
 	};
-
+	preventMore(e) {
+		e.preventDefault();
+	}
 	render() {
 		const { selectedBook, updateBooks } = this.props;
 		return (
 			<div className="book-shelf-changer">
 				<select onChange={(event) => { updateBooks(selectedBook, event.target.value) }}>
-					<option value="" disabled>Move to...</option>
+					<option className="dropdown_title" onClick={(event) => this.preventMore(event) }>Move to...</option>
 					{selectedBook.shelf === "currentlyReading"
 						? <option value="currentlyReading">✔ Currently Reading</option>
 						: <option value="currentlyReading">Currently Reading</option>}
