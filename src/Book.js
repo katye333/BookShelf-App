@@ -24,29 +24,26 @@ class Book extends Component {
 		const { books, updateBooks } = this.props;
 		return (
 			<ol className="books-grid">
-				{books.map((obj) => (
-					<li key={obj.id}>
+				{books.map((book) => (
+					<li key={book.id}>
 						<div className="book">
 						    <div className="book-top">
-						    	{obj.imageLinks.thumbnail.missing && 
-						    		<img className="book-cover-missing" alt="Missing book cover!" />
-						    	}
-						    	{!obj.imageLinks.thumbnail.missing && 
-									<div className="book-cover" style={{
-										width: 128,
+						    	{!book.imageLinks.thumbnail.missing
+						    		? <div className="book-cover" style={{
+						    			width: 128,
 										height: 193,
-										backgroundImage: `url(${obj.imageLinks.thumbnail})`
-									}}></div>
-								}
-
-								<UpdateBtn selectedBook={obj} updateBooks={updateBooks}></UpdateBtn>
+										backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
+									: <div className="book-cover-missing"></div>
+						    	}
+								<UpdateBtn selectedBook={book} updateBooks={updateBooks}></UpdateBtn>
 						    </div>
-						    <div className="book-title">{obj.title}</div>
+						    <div className="book-title">{book.title}</div>
 						    <div className="book-authors">
-                            	<pre>{obj.authors && obj.authors.join('\n')}</pre>
+                            	<pre>{book.authors && book.authors.join('\n')}</pre>
                           	</div>
 						</div>
 					</li>
+
 				))}
 			</ol>
 		)
