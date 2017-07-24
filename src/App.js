@@ -17,7 +17,7 @@ class App extends React.Component {
     }
 
     // After component has been inserted into the DOM,
-    // retrieve the books that are available to the user 
+    // retrieve the books that are available to the user
     componentDidMount() {
         BooksAPI.getAll().then(books => {
             if (books.length > 0) {
@@ -53,7 +53,7 @@ class App extends React.Component {
                 <Route exact path="/" render={() => (
                     <div className="list-books">
                         <div className="list-books-title">
-                            <h1>MyReads</h1>
+                            <h1>{_.startCase("MyReads")}</h1>
                         </div>
                         <div className="list-books-content">
                             <Bookshelf books={this.state.books} updateBooks={this.updateBooks} />

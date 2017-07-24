@@ -98,13 +98,13 @@ body, .app {
 
 /* books grid */
 
-#currentlyReading:after {
+#currentlyReading {
     content: 'Currently Reading';
 }
-#wantToRead:after {
+#wantToRead {
     content: 'Want to Read';
 }
-#read:after {
+#read {
     content: 'Read';
 }
 ol {
@@ -184,4 +184,7 @@ ol {
     padding: 20px 10px 0;
     text-align: center;
     font-size: 0.8em;
+}
+pre {
+    white-space: pre-wrap;
 }

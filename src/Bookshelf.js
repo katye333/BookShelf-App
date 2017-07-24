@@ -30,7 +30,7 @@ class Bookshelf extends React.Component {
             <div>
                 {_.keys(books_by_shelf).map((shelf) => (
                     <div key={shelf} className="bookshelf">
-                        <h2 id={shelf} className="bookshelf-title"></h2>
+                        <h2 id={shelf} className="bookshelf-title">{_.startCase(shelf)}</h2>
                         <div className="bookshelf-books">
                             <Book books={books_by_shelf[shelf]} updateBooks={updateBooks} />
                         </div>
