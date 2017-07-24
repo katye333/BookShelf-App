@@ -3,11 +3,11 @@ import { Route, Link } from 'react-router-dom';
 import _ from 'lodash';
 import * as BooksAPI from './BooksAPI';
 import Bookshelf from './Bookshelf';
-import AddBook from './AddBook';
+import SearchBooks from './SearchBooks';
 import './App.css';
 
 // Handles the state variables and custom events
-class Bookcase extends React.Component {
+class App extends React.Component {
     // Create our empty state variable
     constructor(props) {
         super(props);
@@ -64,15 +64,15 @@ class Bookcase extends React.Component {
                     </div>
                 )} />
                 <Route path="/search" render={({ history }) => (
-                    <AddBook
+                    <SearchBooks
                         updateBooks={(book, shelf) => {
                             this.updateBooks(book, shelf)
                             history.push('/')
                         }}>
-                    </AddBook>
+                    </SearchBooks>
                 )} />
             </div>
         );
     }
 }
-export default Bookcase;
+export default App;

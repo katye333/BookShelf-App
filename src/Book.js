@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import UpdateBtn from './UpdateBtn';
 
 class Book extends Component {
 	static propTypes = {
@@ -23,33 +24,26 @@ class Book extends Component {
 		const { books, updateBooks } = this.props;
 		return (
 			<ol className="books-grid">
-				{books.map((book) => (
-					<li key={book.id}>
+				{books.map((obj) => (
+					<li key={obj.id}>
 						<div className="book">
 						    <div className="book-top">
-						    	{book.imageLinks.thumbnail.missing && 
+						    	{obj.imageLinks.thumbnail.missing && 
 						    		<img className="book-cover-missing" alt="Missing book cover!" />
 						    	}
-						    	{!book.imageLinks.thumbnail.missing && 
-								        <div className="book-cover" style={{
-								        	width: 128,
-								        	height: 193,
-								        	backgroundImage: `url(${book.imageLinks.thumbnail})`
-										}}></div>
+						    	{!obj.imageLinks.thumbnail.missing && 
+									<div className="book-cover" style={{
+										width: 128,
+										height: 193,
+										backgroundImage: `url(${obj.imageLinks.thumbnail})`
+									}}></div>
 								}
-						        <div className="book-shelf-changer">
-			        	            <select onChange={(event) => { updateBooks(book, event.target.value) }}>
-			        	                <option readOnly>Move to...</option>
-			        	                <option value="currentlyReading">Currently Reading</option>
-			        	                <option value="wantToRead">Want to Read</option>
-			        	                <option value="read">Read</option>
-			        	                <option value="none">None</option>
-			        	            </select>
-			        	        </div>
+
+								<UpdateBtn selectedBook={obj} updateBooks={updateBooks}></UpdateBtn>
 						    </div>
-						    <div className="book-title">{book.title}</div>
+						    <div className="book-title">{obj.title}</div>
 						    <div className="book-authors">
-                            	<pre>{book.authors && book.authors.join('\n')}</pre>
+                            	<pre>{obj.authors && obj.authors.join('\n')}</pre>
                           	</div>
 						</div>
 					</li>
