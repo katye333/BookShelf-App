@@ -15,6 +15,9 @@ class UpdateBtn extends Component {
   		this.state.hidden === false ? this.setState({ hidden: true }) : this.setState({ hidden: false});
   	}
 	render() {
+
+		// Build book grid with checkmarks showing the row each book is on (main and search pages)
+		// Update the books on row clicked
 		const { selectedBook, updateBooks } = this.props;
 		return (
 			<div>

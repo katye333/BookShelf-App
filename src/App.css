@@ -175,6 +175,12 @@ pre {
     padding-bottom: 2px;
     padding-top: 2px;
 }
+#currentlyReading,
+#wantToRead,
+#read,
+#none {
+    width: 100%;
+}
 
 /* book cover */
 
@@ -224,11 +230,4 @@ pre {
 }
 .relative {
     position: relative;
-}
-
-#currentlyReading,
-#wantToRead,
-#read,
-#none {
-    width: 100%;
 }
