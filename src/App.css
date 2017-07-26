@@ -148,7 +148,6 @@ pre {
 }
 .container {
     background-color: white;
-    padding: 10px;
     width: 180px;
     margin-top: 10px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -158,6 +157,7 @@ pre {
     color: #808080 !important;
     background-color: transparent !important;
     cursor: not-allowed;
+    padding-left: 5px;
 }
 .dropdown_title:hover {
     color: #808080 !important;
@@ -166,8 +166,14 @@ pre {
 }
 .ddl_opt {
     justify-content: center;
-    padding-left: 10px;
+    padding-left: 15px;
     cursor: pointer;
+}
+.ddl_opt:hover {
+    background-color: #e5e5e5;
+    width: 92.5%;
+    padding-bottom: 2px;
+    padding-top: 2px;
 }
 
 /* book cover */
@@ -218,4 +224,11 @@ pre {
 }
 .relative {
     position: relative;
+}
+
+#currentlyReading,
+#wantToRead,
+#read,
+#none {
+    width: 100%;
 }
