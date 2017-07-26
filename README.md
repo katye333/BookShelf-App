@@ -6,7 +6,8 @@
 Bookshelf allows you to select and categorize books you've read, are currently reading, or want to read.
 This project is part of the ReactJS nanodegree offered by Udacity.
 
-This application was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+This application was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## What You're Getting
 ```
@@ -44,6 +45,11 @@ This application was bootstrapped with [Create React App](https://github.com/fac
 
 ### API Reference
 ---
+##### `get(bookID)`
+* bookID: `<String>`
+* Returns a Promise which resolves to a JSON object containing a book object.
+* This collection represents the books with the passed bookID.
+
 ##### `getAll()`
 * Returns a Promise which resolves to a JSON object containing a collection of book objects.
 * This collection represents the books currently in the bookshelves in your app.
