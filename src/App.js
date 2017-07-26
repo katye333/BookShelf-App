@@ -38,7 +38,7 @@ class App extends React.Component {
     // Update book using API
     // then overwrite books array with updated data from getAll method
     updateBooks = (book, shelf) => {
-        return BooksAPI.update(book, shelf).then(books => {
+        return BooksAPI.update(book, shelf.target.id).then(books => {
             BooksAPI.getAll().then(books => {
                 this.setState({
                     books: books
@@ -63,11 +63,11 @@ class App extends React.Component {
                         </div>
                     </div>
                 )} />
-                <Route path="/search" render={({ history }) => (
+                <Route path="/search" render={() => (
                     <SearchBooks
+                        books={this.state.books}
                         updateBooks={(book, shelf) => {
                             this.updateBooks(book, shelf)
-                            history.push('/')
                         }}>
                     </SearchBooks>
                 )} />

@@ -5,27 +5,44 @@ class UpdateBtn extends Component {
 	static propTypes = {
 		selectedBook: PropTypes.object.isRequired,
         updateBooks: PropTypes.func.isRequired
-	};
-	preventMore(e) {
-		e.preventDefault();
 	}
+  	state = {
+        hidden: true
+    };
+
+  	unhide(event) {
+  		this.state.hidden === false ? this.setState({ hidden: true }) : this.setState({ hidden: false});
+  	}
 	render() {
 		const { selectedBook, updateBooks } = this.props;
 		return (
-			<div className="book-shelf-changer">
-				<select onChange={(event) => { updateBooks(selectedBook, event.target.value) }}>
-					<option className="dropdown_title" onClick={(event) => this.preventMore(event) }>Move to...</option>
-					{selectedBook.shelf === "currentlyReading"
-						? <option value="currentlyReading">✔ Currently Reading</option>
-						: <option value="currentlyReading">Currently Reading</option>}
-					{selectedBook.shelf === "wantToRead"
-						? <option value="wantToRead">✔ Want to Read</option>
-						: <option value="wantToRead">Want to Read</option>}
-					{selectedBook.shelf === "read"
-						? <option value="read">✔ Read</option>
-						: <option value="read">Read</option>}
-					<option value="none">None</option>
-				</select>
+			<div className="layout vertical">
+				<div className="book-shelf-changer" onClick={(event) => { this.unhide(event) }}></div>
+					<div  hidden={this.state.hidden} className="con" onClick={(e) => { updateBooks(selectedBook, e) }}>
+						<div className="dropdown_title layout horizontal">
+							<div>Move to...</div>
+						</div>
+						<div className="ddl_opt layout horizontal start-justified">
+							{selectedBook.shelf === "currentlyReading"
+								? <div id="currentlyReading">✔ Currently Reading</div>
+								: <div id="currentlyReading">Currently Reading</div>}
+						</div>
+						<div className="ddl_opt layout horizontal start-justified">
+							{selectedBook.shelf === "wantToRead"
+								? <div id="wantToRead">✔ Want to Read</div>
+								: <div id="wantToRead">Want to Read</div>}
+						</div>
+						<div className="ddl_opt layout horizontal start-justified">
+							{selectedBook.shelf === "read"
+								? <div id="read">✔ Read</div>
+								: <div id="read">Read</div>}
+						</div>
+						<div className="ddl_opt layout horizontal start-justified">
+							{selectedBook.shelf === "none"
+								? <div id="read">✔ None</div>
+								: <div id="read">None</div>}
+						</div>
+					</div>
 			</div>
 		)
 	}

@@ -27,8 +27,8 @@ class Book extends Component {
 				{books.map((book) => (
 					<li key={book.id}>
 						<div className="book">
-						    <div className="book-top">
-						    	{!book.imageLinks.thumbnail.missing
+						    <div className="book-top end">
+						    	{book.imageLinks && !book.imageLinks.thumbnail.missing
 						    		? <div className="book-cover" style={{
 						    			width: 128,
 										height: 193,
