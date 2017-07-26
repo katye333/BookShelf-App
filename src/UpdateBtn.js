@@ -16,8 +16,9 @@ class UpdateBtn extends Component {
 	render() {
 		const { selectedBook, updateBooks } = this.props;
 		return (
-			<div className="layout vertical">
+			<div>
 				<div className="book-shelf-changer" onClick={(event) => { this.unhide(event) }}></div>
+				<div className="layout vertical">
 					<div  hidden={this.state.hidden} className="con" onClick={(e) => { updateBooks(selectedBook, e) }}>
 						<div className="dropdown_title layout horizontal">
 							<div>Move to...</div>
@@ -43,6 +44,7 @@ class UpdateBtn extends Component {
 								: <div id="none">None</div>}
 						</div>
 					</div>
+				</div>
 			</div>
 		)
 	}
