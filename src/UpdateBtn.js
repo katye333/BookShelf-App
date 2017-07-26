@@ -20,26 +20,26 @@ class UpdateBtn extends Component {
 			<div>
 				<div className="book-shelf-changer" onClick={(event) => { this.unhide(event) }}></div>
 				<div className="layout vertical">
-					<div hidden={this.state.hidden} className="container" onClick={(e) => { updateBooks(selectedBook, e) }}>
+					<div hidden={this.state.hidden} className="container">
 						<div className="dropdown_title layout horizontal">
 							<div>Move to...</div>
 						</div>
-						<div className="ddl_opt layout horizontal start-justified">
+						<div className="ddl_opt layout horizontal start-justified" onClick={(e) => {updateBooks(selectedBook, e)}}>
 							{selectedBook.shelf === "currentlyReading"
 								? <div id="currentlyReading">✔ Currently Reading</div>
 								: <div id="currentlyReading">Currently Reading</div>}
 						</div>
-						<div className="ddl_opt layout horizontal start-justified">
+						<div className="ddl_opt layout horizontal start-justified" onClick={(e) => {updateBooks(selectedBook, e)}}>
 							{selectedBook.shelf === "wantToRead"
 								? <div id="wantToRead">✔ Want to Read</div>
 								: <div id="wantToRead">Want to Read</div>}
 						</div>
-						<div className="ddl_opt layout horizontal start-justified">
+						<div className="ddl_opt layout horizontal start-justified" onClick={(e) => {updateBooks(selectedBook, e)}}>
 							{selectedBook.shelf === "read"
 								? <div id="read">✔ Read</div>
 								: <div id="read">Read</div>}
 						</div>
-						<div className="ddl_opt layout horizontal start-justified">
+						<div className="ddl_opt layout horizontal start-justified" onClick={(e) => {updateBooks(selectedBook, e)}}>
 							{selectedBook.shelf === "none"
 								? <div id="none">✔ None</div>
 								: <div id="none">None</div>}
