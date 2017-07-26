@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
 
 class SearchBooks extends Component {
 	static propTypes = {
+		books: PropTypes.array.isRequired,
 	    updateBooks: PropTypes.func.isRequired
 	};
 
@@ -28,7 +30,17 @@ class SearchBooks extends Component {
 				}
 				else
 				{
-					this.setState({ results: result });
+					// Find books that are already in your personal library and
+					// mark the correct shelf in the dropdown menu
+					const interSect = _.intersectionBy(this.props.books, result, "id");
+					const newUp = _.map(result, function(obj) {
+						let t = _.find(interSect, { "id": obj.id });
+						if (t) {
+							return t;
+						}
+						return obj;
+					});
+					this.setState({ results: newUp });
 				}
 			});
 		}
@@ -38,9 +50,24 @@ class SearchBooks extends Component {
 		}
 	};
 
+	// Update the shelf property in the results array
+	// This will add the checkmark to the selected book (and keep it there)
+	componentWillReceiveProps(nextProps) {
+		const temp = this.state.results;
+
+		const interSect = _.intersectionBy(nextProps.books, temp, "id");
+		const newUp = _.map(temp, function(obj) {
+			let t = _.find(interSect, { "id": obj.id });
+			if (t) {
+				return t;
+			}
+			return obj;
+		});
+		this.setState({ results: newUp });
+	}
 	render() {
 		const { query, results } = this.state;
-		const { updateBooks } = this.props;
+		const { books, updateBooks } = this.props;
 
 		return (
 			<div className="search-books">
