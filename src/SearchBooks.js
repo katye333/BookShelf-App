@@ -67,7 +67,7 @@ class SearchBooks extends Component {
 	}
 	render() {
 		const { query, results } = this.state;
-		const { books, updateBooks } = this.props;
+		const { updateBooks } = this.props;
 
 		return (
 			<div className="search-books">

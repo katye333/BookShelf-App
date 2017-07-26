@@ -39,8 +39,8 @@ class UpdateBtn extends Component {
 						</div>
 						<div className="ddl_opt layout horizontal start-justified">
 							{selectedBook.shelf === "none"
-								? <div id="read">✔ None</div>
-								: <div id="read">None</div>}
+								? <div id="none">✔ None</div>
+								: <div id="none">None</div>}
 						</div>
 					</div>
 			</div>
