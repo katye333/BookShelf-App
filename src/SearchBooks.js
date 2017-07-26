@@ -48,7 +48,7 @@ class SearchBooks extends Component {
 		{
 			this.setState({ results: [] });
 		}
-	};
+	}
 
 	// Update the shelf property in the results array
 	// This will add the checkmark to the selected book (and keep it there)

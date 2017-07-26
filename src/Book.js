@@ -9,6 +9,7 @@ class Book extends Component {
         updateBooks: PropTypes.func.isRequired
     };
 
+    // Check if the books obj has a thumbnail image for each item
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.books.length > 0) {
 			_.each(nextProps.books, function (obj) {
@@ -43,10 +44,9 @@ class Book extends Component {
                           	</div>
 						</div>
 					</li>
-
 				))}
 			</ol>
-		)
+		);
 	}
 }
 export default Book;

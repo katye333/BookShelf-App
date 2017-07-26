@@ -5,12 +5,13 @@ class UpdateBtn extends Component {
 	static propTypes = {
 		selectedBook: PropTypes.object.isRequired,
         updateBooks: PropTypes.func.isRequired
-	}
+	};
   	state = {
         hidden: true
     };
 
   	unhide(event) {
+  		// Add property to control the current view of the drop down menu
   		this.state.hidden === false ? this.setState({ hidden: true }) : this.setState({ hidden: false});
   	}
 	render() {
@@ -19,7 +20,7 @@ class UpdateBtn extends Component {
 			<div>
 				<div className="book-shelf-changer" onClick={(event) => { this.unhide(event) }}></div>
 				<div className="layout vertical">
-					<div  hidden={this.state.hidden} className="con" onClick={(e) => { updateBooks(selectedBook, e) }}>
+					<div hidden={this.state.hidden} className="container" onClick={(e) => { updateBooks(selectedBook, e) }}>
 						<div className="dropdown_title layout horizontal">
 							<div>Move to...</div>
 						</div>
@@ -46,7 +47,7 @@ class UpdateBtn extends Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 export default UpdateBtn;
